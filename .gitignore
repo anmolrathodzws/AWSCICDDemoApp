@@ -5,3 +5,6 @@
 /AWSWebApp/.vs/AWSWebApp
 /AWSWebApp/obj
 /AWSWebApp/AWSWebApp.csproj.user
+/.vs
+/bin/Debug/net8.0
+/obj
