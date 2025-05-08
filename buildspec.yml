@@ -1,0 +1,29 @@
+version: 0.2
+
+phases:
+  install:
+    runtime-versions:
+      dotnet: 8.0
+    commands:
+      - echo Installing dependencies...
+      - dotnet restore
+
+  pre_build:
+    commands:
+      - echo Running unit tests...
+      - dotnet test --no-restore --verbosity normal
+
+  build:
+    commands:
+      - echo Building the project...
+      - dotnet publish -c Release -o ./publish --no-restore
+
+  post_build:
+    commands:
+      - echo Build completed on `date`
+      - echo Zipping the publish directory...
+      - zip -r aspnetcore-razor-app.zip ./publish
+
+artifacts:
+  files:
+    - aspnetcore-razor-app.zip
