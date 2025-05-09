@@ -2,7 +2,7 @@ version: 0.0
 os: linux
 files:
   - source: /
-    destination: /var/www/aspnetcore-razor-app
+    destination: /var/www/publish
     overwrite: yes
 
 hooks:
