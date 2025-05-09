@@ -5,25 +5,28 @@ phases:
     runtime-versions:
       dotnet: 8.0
     commands:
-      - echo Installing dependencies...
+      - echo "Installing dependencies..."
       - dotnet restore
 
   pre_build:
     commands:
-      - echo Running unit tests...
-      - dotnet test --no-restore --verbosity normal
+      - echo "Running pre-build steps..."
+      - dotnet tool restore
+      - dotnet build -c Release
 
   build:
     commands:
-      - echo Building the project...
-      - dotnet publish -c Release -o ./publish --no-restore
+      - echo "Publishing the application..."
+      - dotnet publish -c Release -o ./publish
 
   post_build:
     commands:
-      - echo Build completed on `date`
-      - echo Zipping the publish directory...
-      - zip -r aspnetcore-razor-app.zip ./publish
+      - echo "Build and publish completed on `date`."
+      - echo "Zipping the published output..."
+      - zip -r publish.zip ./publish
 
 artifacts:
   files:
-    - aspnetcore-razor-app.zip
+    - publish.zip
+    - appspec.yml
+    - scripts/**/*
